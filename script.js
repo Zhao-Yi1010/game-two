@@ -165,7 +165,7 @@ window.addEventListener("load", async () => {
   const startBtn = document.getElementById("startBtn");
 
   modal.style.display = "flex";
-  speak("歡迎來到合作任務畫畫遊戲，接下來請聽玩法說明。請用手對準鏡頭畫圖，說出顏色就能換畫筆。畫好記得按完成喔！");
+  speak("歡迎來到合作任務畫畫遊戲，接下來請聽玩法說明。請用手對準鏡頭畫圖。畫好記得按完成喔！");
 
   startBtn.addEventListener("click", () => {
     modal.style.display = "none";
@@ -213,45 +213,6 @@ function speak(text) {
   u.rate = 0.8;//調整語速(數字越小越慢)
   speechSynthesis.speak(u);
 }
-
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-const recognizer = new SpeechRecognition();
-const micIcon = document.getElementById("micIndicator");
-
-recognizer.onaudiostart = () => {
-  micIcon.style.display = "block";
-};
-recognizer.onaudioend = () => {
-  micIcon.style.display = "none";
-};
-recognizer.continuous = true;
-recognizer.interimResults = false;
-recognizer.lang = "zh-TW";
-recognizer.onresult = (event) => {
-  if(isExplaining) return;
-  const t = event.results[event.results.length - 1][0].transcript.trim();
-  console.log("🎤 指令：", t);
-  if (t.includes("紅")) playerColor = "#FF0000", speak("紅色畫筆");
-  else if (t.includes("橘") || t.includes("橙")) playerColor = "#FFA500", speak("橘色畫筆、橙色畫筆");
-  else if (t.includes("黃")) playerColor = "#FFFF00", speak("黃色畫筆");
-  else if (t.includes("綠")) playerColor = "#008000", speak("綠色畫筆");
-  else if (t.includes("藍")) playerColor = "#0000FF", speak("藍色畫筆");
-  else if (t.includes("紫")) playerColor = "#8A2BE2", speak("紫色畫筆");
-  else if (t.includes("粉")) playerColor = "#FFC0CB", speak("粉紅色畫筆");
-  else if (t.includes("白")) playerColor = "#FFFFFF", speak("白色畫筆");
-  else if (t.includes("黑")) playerColor = "#000000", speak("黑色畫筆");
-  else if (t.includes("清除")) {
-    saveSnapshot("語音清除");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    remove(ref(db, "drawings"));
-    speak("畫布清乾淨了！");
-  } else if (t.includes("完成")) {
-    finishBtn.click();
-    recognizer.stop();
-    setTimeout(() => recognizer.start(), 500);
-  }
-};
-recognizer.start();
 let timer;
 let timeLeft = 240; // 240 秒 = 4 分鐘
 const timerDisplay = document.getElementById("timer");
@@ -265,13 +226,8 @@ function startCountdown() {
       clearInterval(countdown);
       timerDisplay.textContent = "⏰ 時間到！";
      canDraw = false; // ⛔ 停止畫圖
-      speak("時間到了！畫畫結束！");
-     }
-
-    timerDisplay.textContent = `剩下時間：${formatTime(timeLeft)}`;
-    if (timeLeft <= 0) {
-      clearInterval(timer);
       speak("時間到了！我們來看成果吧！");
+     }
       finishBtn.click(); // 自動點擊完成按鈕
     }
   }, 1000);
