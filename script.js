@@ -82,11 +82,25 @@ let penSize = 5;
 let playerColor = "#FF0000";
 document.querySelectorAll(".colorBtn").forEach(btn => {
   btn.addEventListener("click", () => {
-    playerColor = btn.getAttribute("data-color");
-    speak("你選的是這個顏色！");
+    playerColor = btn.dataset.color;
+
+    // 顏色代碼對照中文名稱
+    const colorNames = {
+      "#FF0000": "紅色",
+      "#FF8000": "橘色",
+      "#FFFF00": "黃色",
+      "#00FF00": "綠色",
+      "#0000FF": "藍色",
+      "#8000FF": "紫色",
+      "#FF99CC": "粉紅色",
+      "#000000": "黑色",
+      "#FFFFFF": "白色"
+    };
+
+   const name = colorNames[playerColor] || "這個顏色";
+   speak(`你選擇的是 ${name}`);
   });
 });
-
 document.getElementById("clearBtn").addEventListener("click", () => {
   saveSnapshot("清除前");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -239,7 +253,7 @@ recognizer.onresult = (event) => {
 };
 recognizer.start();
 let timer;
-let timeLeft = 180; // 180 秒 = 3 分鐘
+let timeLeft = 240; // 240 秒 = 4 分鐘
 const timerDisplay = document.getElementById("timer");
 
 function startCountdown() {
@@ -247,10 +261,13 @@ function startCountdown() {
   timerDisplay.textContent = `剩下時間：${formatTime(timeLeft)}`;
   timer = setInterval(() => {
     timeLeft--;
-    if (timeLeft === 60){
-      speak('時間快到嘍')
-      alert('時間快到嘍')
-    }
+     if (timeLeft <= 0) {
+      clearInterval(countdown);
+      timerDisplay.textContent = "⏰ 時間到！";
+     canDraw = false; // ⛔ 停止畫圖
+      speak("時間到了！畫畫結束！");
+     }
+
     timerDisplay.textContent = `剩下時間：${formatTime(timeLeft)}`;
     if (timeLeft <= 0) {
       clearInterval(timer);
