@@ -1,0 +1,180 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #e6f7f2;
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+/* 🎥 攝影機畫面 */
+#webcam {
+  transform: scaleX(-1);
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 160px;
+  height: 120px;
+  border: 2px solid #aaaaaa;
+  border-radius: 8px;
+  z-index: 10;
+}
+
+/* 🖼️ 畫布 */
+#output {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* 🖱️ 畫筆指標圓點 */
+#cursorDot {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 0, 0, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+  display: none;
+}
+
+/* ✅ 任務提示區塊 */
+#prompt {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333333;
+  z-index: 1000;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 🎨 顏色與筆刷選擇 */
+#colorSelector,
+#penSelector {
+  position: fixed;
+  left: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 100;
+}
+
+#colorSelector { top: 80px; }
+#penSelector { top: 130px; }
+
+.colorBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+}
+
+/* 筆刷按鈕 */
+.penBtn {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #aaaaaa;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+/* 🧼 清除畫布 */
+#clearBtn {
+  position: fixed;
+  top: 180px;
+  left: 10px;
+  z-index: 100;
+  padding: 8px 20px;
+  font-size: 16px;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* 🎉 完成任務按鈕（小巧置底） */
+#finishBtn {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 10px 16px;
+  font-size: 14px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 🛠️ 重設玩家按鈕（隱藏） */
+#resetPlayersBtn,
+#forceResetBtn {
+  display: none;
+}
+#micIndicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  display: none;
+  animation: blink 1s infinite;
+  z-index: 9999;
+  color: #ff3366;
+  text-shadow:0 0 10px #ff3366, 0 0 20px #ff99aa;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 90%;
+  font-size: 20px;
+  text-align: center;
+  box-shadow: 0 0 10px #888888;
+}
+.modal-content h2 {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+.modal-content li {
+  margin: 8px 0;
+}
+#startBtn {
+  font-size: 18px;
+  padding: 8px 16px;
+  background: #8dd0c6;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
