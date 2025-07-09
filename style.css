@@ -1,3 +1,4 @@
+/* 🌈 背景與全域設定 */
 body {
   margin: 0;
   overflow: hidden;
@@ -26,7 +27,7 @@ body {
   z-index: 1;
 }
 
-/* 🖱️ 畫筆指標圓點 */
+/* 🎯 畫筆指標 */
 #cursorDot {
   position: fixed;
   width: 20px;
@@ -64,7 +65,6 @@ body {
   gap: 6px;
   z-index: 100;
 }
-
 #colorSelector { top: 80px; }
 #penSelector { top: 130px; }
 
@@ -76,7 +76,6 @@ body {
   cursor: pointer;
 }
 
-/* 筆刷按鈕 */
 .penBtn {
   padding: 5px 10px;
   font-size: 14px;
@@ -100,7 +99,7 @@ body {
   cursor: pointer;
 }
 
-/* 🎉 完成任務按鈕（小巧置底） */
+/* 🎉 完成任務按鈕 */
 #finishBtn {
   position: fixed;
   bottom: 30px;
@@ -116,28 +115,7 @@ body {
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 🛠️ 重設玩家按鈕（隱藏） */
-#resetPlayersBtn,
-#forceResetBtn {
-  display: none;
-}
-#micIndicator {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  font-size: 30px;
-  display: none;
-  animation: blink 1s infinite;
-  z-index: 9999;
-  color: #ff3366;
-  text-shadow:0 0 10px #ff3366, 0 0 20px #ff99aa;
-}
-
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.3; }
-  100% { opacity: 1; }
-}
+/* 👶 教學 Modal */
 .modal {
   position: fixed;
   top: 0; left: 0;
@@ -170,6 +148,8 @@ body {
 .modal-content li {
   margin: 8px 0;
 }
+
+/* 👆 開始畫畫按鈕 */
 #startBtn {
   font-size: 18px;
   padding: 8px 16px;
@@ -177,4 +157,12 @@ body {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+}
+
+/* 🚫 初始隱藏的功能按鈕 */
+#colorSelector,
+#finishBtn,
+#clearBtn,
+#resetPlayersBtn {
+  display: none;
 }
