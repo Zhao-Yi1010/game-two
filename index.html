@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  <title>合作任務畫畫</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <!-- 🎥 攝影機畫面 -->
-  <video id="webcam" autoplay playsinline></video>
+<!-- 🎥 攝影機畫面 -->
+<video id="webcam" autoplay playsinline></video>
 
-  <!-- 顯示任務提示 -->
-  <h2 id="prompt">請稍候載入任務...</h2>
+<!-- 顯示任務提示 -->
+<h2 id="prompt">請稍候載入任務...</h2>
+
 <!-- 👶 幼兒玩法說明畫面 -->
 <div id="howToPlay" class="modal">
   <div class="modal-content">
@@ -24,39 +17,45 @@
     <button id="startBtn">我知道了，開始畫畫！</button>
   </div>
 </div>
-  <!-- 🎨 顏色選擇 -->
-  <div id="colorSelector">
-  <button class="colorBtn" style="background:#FF0000;" data-color="#FF0000"></button> <!-- 紅 -->
-  <button class="colorBtn" style="background:#FF8000;" data-color="#FF8000"></button> <!-- 橘 -->
-  <button class="colorBtn" style="background:#FFFF00;" data-color="#FFFF00"></button> <!-- 黃 -->
-  <button class="colorBtn" style="background:#00FF00;" data-color="#00FF00"></button> <!-- 綠 -->
-  <button class="colorBtn" style="background:#0000FF;" data-color="#0000FF"></button> <!-- 藍 -->
-  <button class="colorBtn" style="background:#8000FF;" data-color="#8000FF"></button> <!-- 紫 -->
-  <button class="colorBtn" style="background:#FF99CC;" data-color="#FF99CC"></button> <!-- 粉 -->
-  <button class="colorBtn" style="background:#000000;" data-color="#000000"></button> <!-- 黑 -->
-  <button class="colorBtn" style="background:#FFFFFF;" data-color="#FFFFFF"></button> <!-- 白 -->
+
+<!-- 🎨 顏色選擇 -->
+<div id="colorSelector" style="display:none;">
+  <button class="colorBtn" style="background:#FF0000;" data-color="#FF0000"></button>
+  <button class="colorBtn" style="background:#FF8000;" data-color="#FF8000"></button>
+  <button class="colorBtn" style="background:#FFFF00;" data-color="#FFFF00"></button>
+  <button class="colorBtn" style="background:#00FF00;" data-color="#00FF00"></button>
+  <button class="colorBtn" style="background:#0000FF;" data-color="#0000FF"></button>
+  <button class="colorBtn" style="background:#8000FF;" data-color="#8000FF"></button>
+  <button class="colorBtn" style="background:#FF99CC;" data-color="#FF99CC"></button>
+  <button class="colorBtn" style="background:#000000;" data-color="#000000"></button>
+  <button class="colorBtn" style="background:#FFFFFF;" data-color="#FFFFFF"></button>
 </div>
 
 <!-- 🎉 完成任務 -->
-<button id="finishBtn">🎉 完成任務</button>
-  
-  <!-- 🧼 清除畫布 -->
-  <button id="clearBtn">清除畫布</button>
+<button id="finishBtn" style="display:none;">🎉 完成任務</button>
 
-  <!-- 🖼️ 畫布 -->
-  <canvas id="output"></canvas>
-  <!-- 🔁 重設玩家角色 -->
-  <button id="resetPlayersBtn" style="position:fixed; top:10px; right:10px; z-index:999;">🔁 重設玩家角色</button>
-   <!-- 倒數計時器-->
-  <div id="timer" style="position:fixed; top:10px; right:10px; background:#fff; color:#000; padding:10px; font-size:24px; display:none; z-index:1000;"></div>
-  <!-- 🎯 畫筆指標 -->
-  <div id="cursorDot" style="position:fixed; width:20px; height:20px; background:#ff69b4; border-radius:50%; z-index:999; pointer-events:none; display:none;"></div>
+<!-- 🧼 清除畫布 -->
+<button id="clearBtn" style="display:none;">清除畫布</button>
 
-  <!-- MediaPipe -->
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<!-- 🔄 重設玩家（避免 JS 出錯）-->
+<button id="resetPlayersBtn" style="display:none;">重設玩家</button>
 
-  <!-- JS -->
-  <script type="module" src="script.js"></script>
-</body>
-</html>
+<!-- 🖼️ 畫布 -->
+<canvas id="output"></canvas>
+
+<!-- ⏲️ 倒數計時器 -->
+<div id="timer"></div>
+
+<!-- 🎯 畫筆指標 -->
+<div id="cursorDot"></div>
+
+<!-- ✅ Firebase CDN -->
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-database-compat.js"></script>
+
+<!-- ✅ MediaPipe Hands + Camera -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.min.js"></script>
+
+<!-- 你的 JS 主程式 -->
+<script src="script.js"></script>
